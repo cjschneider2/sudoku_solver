@@ -13,7 +13,7 @@ impl Board {
         for col in 0..9 {
             let check = Board::check_column(&self, col);
             match check {
-                None => (),
+                None => return false,
                 Some(remaining) => {
                     println!("The following numbers are remaining: {:?}",
                              remaining)
@@ -26,7 +26,29 @@ impl Board {
     }
 
     fn check_column(&self, col_num: usize) -> Option<Vec<usize>> {
-        Some(vec!{1,2,3})
+        // Create a new return vector which will contain the numbers which
+        // are still valid for this column.
+        let mut return_vector:Vec<usize> = Vec::new();
+        // we'll check every (num)ber to see if it is in the column, if it
+        // is we'll mark it and push it onto the return_vector.
+        for num in 1..10 { // [1,10) in rust
+            let mut contains_num = false;
+            for idx in 0..9 {
+                if ( self.entries[idx][col_num] == num ) {
+                    // we can't have double numbers so we'll check here for it
+                    // and return a None value in that case.
+                    if contains_num {
+                        return None;
+                    } else {
+                        contains_num = true;
+                    }
+                }
+            }
+            if contains_num {
+                return_vector.push(num);
+            }
+        }
+        Some(return_vector)
     }
 
     fn check_row(&self, row_num: usize) -> Option<Vec<usize>> {
