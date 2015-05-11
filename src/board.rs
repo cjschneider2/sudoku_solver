@@ -37,6 +37,7 @@ impl Board {
                 if ( self.entries[idx][col_num] == num ) {
                     // we can't have double numbers so we'll check here for it
                     // and return a None value in that case.
+                    println!("{} == {}?", self.entries[idx][col_num], num);
                     if contains_num {
                         return None;
                     } else {
@@ -44,7 +45,7 @@ impl Board {
                     }
                 }
             }
-            if contains_num {
+            if !contains_num {
                 return_vector.push(num);
             }
         }
