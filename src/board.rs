@@ -9,40 +9,46 @@ impl Board {
     ///     row unique: Each row has to have the #'s 1..9 w/o repeats
     ///     zone unique: Each 3x3 area needs to have the #'s 1..9 w/o repeats
     ///
-    /// NOTE: This solution currently rejects partially filled out boards.
-    pub fn is_valid_solution(&self) -> bool {
+    /// Returns: A bool tuple in the form of (valid, complete)
+    pub fn is_valid_solution(&self) -> (bool, bool) {
+        let mut valid = true;
+        let mut complete = true;
         // Check columns
+        println!("Checking columns");
         for col in 0..9 {
             let check = Board::check_column(&self, col);
             match check {
-                None => return false,
-                Some(remaining) => { if remaining.len() > 0 { return false; }
-                    //println!("Remaining in column: {:?}", remaining)
+                None => valid = false,
+                Some(remaining) => {
+                    if remaining.len() > 0 { complete = false; }
                 }
             }
         }
         // Check rows
+        println!("Checking rows");
         for row in 0..9 {
             let check = Board::check_row(&self, row);
             match check {
-                None => return false,
-                Some(remaining) => { if remaining.len() > 0 { return false; }
-                    //println!("Remaining in row: {:?}", remaining)
+                None => valid =  false,
+                Some(remaining) => {
+                    if remaining.len() > 0 { complete = false; }
                 }
             }
         }
         // Check zones
+        println!("Checking zones");
         for zone in 0..9 {
             let check = Board::check_zone(&self, zone);
             match check {
-                None => return false,
-                Some(remaining) => { if remaining.len() > 0 { return false; }
-                    //println!("Remaining in zone: {:?}", remaining)
+                None => valid = false,
+                Some(remaining) => {
+                    if remaining.len() > 0 { complete = false; }
                 }
             }
         }
         // Return the default case if all the other checks have been valid.
-        true
+        println!("Returning: ({},{})", valid, complete);
+        (valid, complete)
     }
 
     fn check_column(&self, col_num: usize) -> Option<Vec<usize>> {

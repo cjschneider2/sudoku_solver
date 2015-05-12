@@ -13,10 +13,10 @@ mod test {
         a_board.display();
     }
     #[test]
-    fn empty_not_valid_solution() {
+    fn empty_not_complete_solution() {
         let empty_board = super::board::new_empty();
-        let value = empty_board.is_valid_solution();
-        assert_eq!(value, false);
+        let ( _ , complete) = empty_board.is_valid_solution();
+        assert_eq!(complete, false);
     }
     #[test]
     fn test_a_valid_solution() {
@@ -32,7 +32,7 @@ mod test {
              [ 9,3,7, 8,4,6, 2,5,1],
              [ 1,4,8, 3,5,2, 9,6,7],
              [ 2,6,5, 1,7,9, 8,3,4]]);
-        let value = a_board.is_valid_solution();
-        assert_eq!(value, true);
+        let (valid, _ ) = a_board.is_valid_solution();
+        assert_eq!(valid, true);
     }
 }
