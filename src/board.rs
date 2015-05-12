@@ -1,3 +1,5 @@
+use std::collections::HashMap;
+
 pub struct Board {
     entries: [[usize; 9]; 9]
 }
@@ -74,6 +76,7 @@ impl Board {
                 return_vector.push(num);
             }
         }
+        println!("");
         Some(return_vector)
     }
 
@@ -146,7 +149,43 @@ impl Board {
                 iter_vec.push((idx,idy));
             }
         }
-        return Some(iter_vec)
+        Some(iter_vec)
+    }
+
+    /// Finds and returns a vector of valid posibilites for the given coordinates.
+    pub fn get_valid_pos(&self, x:usize, y:usize) -> Vec<usize> {
+        let mut result_vec:Vec<usize> = Vec::new();
+        let x_z = (x as f32/3f32).floor() as usize;
+        let y_z = (y as f32/3f32).floor() as usize;
+        let zone_num = x_z*3 + y_z;
+        // We can check the col, row, and zone to get a set of posibilities.
+        let row = self.check_row(x).unwrap_or(Vec::new());
+        let col = self.check_column(y).unwrap_or(Vec::new());
+        let zone = self.check_zone(zone_num).unwrap_or(Vec::new());
+
+        // Here comes the problem hoever, we can't just merge and dedup the list.
+        // We have to make sure that each possible entry is also valid for the others
+        // otherwise it's not a valid move.
+        let mut map:HashMap<usize,usize> = HashMap::with_capacity(9);
+        for itr in row {
+            let is_in = *map.get_mut(&itr).unwrap_or(&mut 0);
+            map.insert(itr, is_in+1);
+        }
+        for itr in col {
+            let is_in = *map.get_mut(&itr).unwrap_or(&mut 0);
+            map.insert(itr, is_in+1);
+        }
+        for itr in zone{
+            let is_in = *map.get_mut(&itr).unwrap_or(&mut 0);
+            map.insert(itr, is_in+1);
+        }
+        // We'll sort out the entries with more than one appearance into the
+        // result vector
+        for (key, val) in map.iter() {
+            if *val > 1 { result_vec.push(*key); }
+        }
+        result_vec.sort();
+        result_vec
     }
 
     /// Displays the board in a wonderfully retro ASCII style.
