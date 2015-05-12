@@ -36,4 +36,3 @@ mod test {
         assert_eq!(value, true);
     }
 }
-
