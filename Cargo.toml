@@ -2,3 +2,17 @@
 name = "sudoku_solver"
 version = "0.1.0"
 authors = ["cjschneider2 <cjschneider2@gmail.com>"]
+
+[lib]
+name = "sudoku_solver"
+path = "src/lib.rs"
+test = true
+bench = false
+doc = false
+
+[[bin]]
+name = "sudoku_solver"
+path = "src/main.rs"
+test = false
+bench = false
+doc = false

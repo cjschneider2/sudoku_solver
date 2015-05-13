@@ -1,10 +1,15 @@
 use std::collections::HashMap;
 
+#[derive(Eq, PartialEq, Clone, Debug)]
 pub struct Board {
     entries: [[usize; 9]; 9]
 }
 
 impl Board {
+    pub fn insert(&mut self, value: usize, x: usize, y: usize) {
+        self.entries[x][y] = value;
+    }
+
     /// Checks to see if the board is a valid sudoku solution.
     /// Three "rules" need to be checked:
     ///     column unique: Each column has to have the #'s 1..9 w/o repeats
