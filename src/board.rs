@@ -6,6 +6,11 @@ pub struct Board {
 }
 
 impl Board {
+
+    pub fn val_at(&self, x: usize, y: usize) -> usize {
+        self.entries[x][y]
+    }
+
     pub fn insert(&mut self, value: usize, x: usize, y: usize) {
         self.entries[x][y] = value;
     }
@@ -81,7 +86,6 @@ impl Board {
                 return_vector.push(num);
             }
         }
-        println!("");
         Some(return_vector)
     }
 
@@ -191,6 +195,24 @@ impl Board {
         }
         result_vec.sort();
         result_vec
+    }
+
+    /// Finds the next empty location
+    pub fn next_empty(&self) -> Option<(usize,usize)> {
+        let (mut e_x, mut e_y, mut empty) = (0,0, true);
+        for idx in 0..9 {
+            for idy in 0..9 {
+                if self.entries[idx][idy] == 0 {
+                    e_x = idx;
+                    e_y = idy;
+                    empty = false;
+                }
+            }
+        }
+        match empty {
+            true => None,
+            false=> Some((e_x, e_y))
+        }
     }
 
     /// Displays the board in a wonderfully retro ASCII style.
