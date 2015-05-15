@@ -65,7 +65,7 @@ impl SolState {
 ///    possibilities left.
 pub fn solve_with_backtracing(in_state: Box<SolState>) -> Option<Box<SolState>> {
     // Create/initialize a new solution state
-    let mut new_state = Box::new(in_state.next_state());
+    let new_state = Box::new(in_state.next_state());
     println!("{:?}",new_state);
     match *new_state {
         Some(state) => {
@@ -82,7 +82,6 @@ pub fn solve_with_backtracing(in_state: Box<SolState>) -> Option<Box<SolState>> 
 
 #[cfg(test)]
 mod tests {
-    use board::Board;
     use board::new_with_entries;
     #[test]
     fn test_next_state_next_vector() {

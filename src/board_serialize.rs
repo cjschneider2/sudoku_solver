@@ -38,8 +38,8 @@ pub fn deserialize(input_str:&str) -> Board {
 
 #[cfg(test)]
 mod test {
-    use board::Board;
-    use board::{new_empty, new_with_entries};
+    //use board::Board;
+    use board::new_with_entries;
     #[test]
     fn test_deserialize_w_zero_as_placeholders() {
         let test_str = "003020600900305001001806400008102900700000008006708200002609500800203009005010300";
@@ -55,7 +55,7 @@ mod test {
          [ 0,0,2, 6,0,9, 5,0,0],
          [ 8,0,0, 2,0,3, 0,0,9],
          [ 0,0,5, 0,1,0, 3,0,0]]);
-        let mut input_board = super::deserialize(&test_str);
+        let input_board = super::deserialize(&test_str);
         assert_eq!(input_board, test_board);
     }
 }

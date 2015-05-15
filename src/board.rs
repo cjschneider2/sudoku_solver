@@ -290,7 +290,7 @@ pub fn new_with_entries( input_entries: [[usize; 9]; 9] ) -> Board {
 
 #[cfg(test)]
 mod tests {
-    use super::Board;
+    //use super::Board;
     use super::{new_empty, new_with_entries};
 
     #[test]
