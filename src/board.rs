@@ -26,7 +26,6 @@ impl Board {
         let mut valid = true;
         let mut complete = true;
         // Check columns
-        println!("Checking columns");
         for col in 0..9 {
             let check = Board::check_column(&self, col);
             match check {
@@ -37,7 +36,6 @@ impl Board {
             }
         }
         // Check rows
-        println!("Checking rows");
         for row in 0..9 {
             let check = Board::check_row(&self, row);
             match check {
@@ -48,7 +46,6 @@ impl Board {
             }
         }
         // Check zones
-        println!("Checking zones");
         for zone in 0..9 {
             let check = Board::check_zone(&self, zone);
             match check {
@@ -59,7 +56,7 @@ impl Board {
             }
         }
         // Return the default case if all the other checks have been valid.
-        println!("Returning: ({},{})", valid, complete);
+        //println!("Returning: ({},{})", valid, complete);
         (valid, complete)
     }
 
