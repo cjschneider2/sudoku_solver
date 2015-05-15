@@ -139,8 +139,7 @@ impl Board {
         Some(return_vector)
     }
 
-    /// This is a helper function to calculate the ranges needed and returns
-    /// a vector of tuple coordinates that can be iterated upon.
+    /// This is a helper function to calculate the ranges needed for a zone.
     fn zone_range(&self, zone_num: usize) -> Option<Vec<(usize,usize)>> {
         // A simple check to see if we are staying within the bounds...
         // Probably not needed if it's called correctly.
@@ -158,43 +157,7 @@ impl Board {
         Some(iter_vec)
     }
 
-    /// Finds and returns a vector of valid posibilites for the given coordinates.
-    pub fn get_valid_pos(&self, x:usize, y:usize) -> Vec<usize> {
-        let mut result_vec:Vec<usize> = Vec::new();
-        let x_z = (x as f32/3f32).floor() as usize;
-        let y_z = (y as f32/3f32).floor() as usize;
-        let zone_num = x_z*3 + y_z;
-        // We can check the col, row, and zone to get a set of posibilities.
-        let row = self.check_row(x).unwrap_or(Vec::new());
-        let col = self.check_column(y).unwrap_or(Vec::new());
-        let zone = self.check_zone(zone_num).unwrap_or(Vec::new());
-
-        // Here comes the problem hoever, we can't just merge and dedup the list.
-        // We have to make sure that each possible entry is also valid for the others
-        // otherwise it's not a valid move.
-        let mut map:HashMap<usize,usize> = HashMap::with_capacity(9);
-        for itr in row {
-            let is_in = *map.get_mut(&itr).unwrap_or(&mut 0);
-            map.insert(itr, is_in+1);
-        }
-        for itr in col {
-            let is_in = *map.get_mut(&itr).unwrap_or(&mut 0);
-            map.insert(itr, is_in+1);
-        }
-        for itr in zone{
-            let is_in = *map.get_mut(&itr).unwrap_or(&mut 0);
-            map.insert(itr, is_in+1);
-        }
-        // We'll sort out the entries with more than one appearance into the
-        // result vector
-        for (key, val) in map.iter() {
-            if *val > 1 { result_vec.push(*key); }
-        }
-        result_vec.sort();
-        result_vec
-    }
-
-    /// Finds the next empty location
+    /// Finds the next empty board location
     pub fn next_empty(&self) -> Option<(usize,usize)> {
         let (mut e_x, mut e_y, mut empty) = (0,0, true);
         for idx in 0..9 {
@@ -264,6 +227,47 @@ impl Board {
         }
         println!("+---+---+---+");
     }
+
+    /*
+    /// Warning: Unstable
+    /// Finds and returns a vector of valid posibilites for the given coordinates.
+    /// This process is an attempt to only check valid positions to save some
+    /// computing power.
+    pub fn get_valid_pos(&self, x:usize, y:usize) -> Vec<usize> {
+        let mut result_vec:Vec<usize> = Vec::new();
+        let x_z = (x as f32/3f32).floor() as usize;
+        let y_z = (y as f32/3f32).floor() as usize;
+        let zone_num = x_z*3 + y_z;
+        // We can check the col, row, and zone to get a set of posibilities.
+        let row = self.check_row(x).unwrap_or(Vec::new());
+        let col = self.check_column(y).unwrap_or(Vec::new());
+        let zone = self.check_zone(zone_num).unwrap_or(Vec::new());
+
+        // Here comes the problem hoever, we can't just merge and dedup the list.
+        // We have to make sure that each possible entry is also valid for the others
+        // otherwise it's not a valid move.
+        let mut map:HashMap<usize,usize> = HashMap::with_capacity(9);
+        for itr in row {
+            let is_in = *map.get_mut(&itr).unwrap_or(&mut 0);
+            map.insert(itr, is_in+1);
+        }
+        for itr in col {
+            let is_in = *map.get_mut(&itr).unwrap_or(&mut 0);
+            map.insert(itr, is_in+1);
+        }
+        for itr in zone{
+            let is_in = *map.get_mut(&itr).unwrap_or(&mut 0);
+            map.insert(itr, is_in+1);
+        }
+        // We'll sort out the entries with more than one appearance into the
+        // result vector
+        for (key, val) in map.iter() {
+            if *val > 1 { result_vec.push(*key); }
+        }
+        result_vec.sort();
+        result_vec
+    }
+    */
 }
 
 pub fn new_empty( ) -> Board {
@@ -287,7 +291,6 @@ pub fn new_with_entries( input_entries: [[usize; 9]; 9] ) -> Board {
 
 #[cfg(test)]
 mod tests {
-    //use super::Board;
     use super::{new_empty, new_with_entries};
 
     #[test]
