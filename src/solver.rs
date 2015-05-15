@@ -11,11 +11,11 @@ use board::Board;
 /// entry will be set back to zero and the process will continue again; until it
 /// completes or fails.
 pub fn solve_with_backtracing(state:&mut Box<Board>) -> bool {
-    let mut row = 0;
-    let mut col = 0;
+    let mut _row = 0; // the underscore silences a silly warning about the
+    let mut _col = 0; // variables being (possibly) unused.
 
     match state.next_empty() {
-        Some((x,y)) => { row = x; col = y; }
+        Some((x,y)) => { _row = x; _col = y; }
         None => { return true; } // the board is full
     }
 
@@ -23,11 +23,11 @@ pub fn solve_with_backtracing(state:&mut Box<Board>) -> bool {
         // check for conflicts and insert a new number if okay
         let (valid, _ ) = state.is_valid_solution();
         if valid {
-            state.insert(num, row, col);
+            state.insert(num, _row, _col);
             // if solved then return true
             if solve_with_backtracing(state) { return true; }
             // else we'll undo our changes
-            state.insert(0, row, col);
+            state.insert(0, _row, _col);
         }
     }
     false // initate backtracking

@@ -11,7 +11,7 @@ fn display_empty_board() {
     a_board.display();
 }
 
-#[bench]
+#[test]
 fn test_solution () {
     let mut a_board = Box::new(board::new_with_entries(
         [[ 4,5,3, 9,2,7, 1,8,6],

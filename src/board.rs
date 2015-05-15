@@ -1,4 +1,4 @@
-use std::collections::HashMap;
+//use std::collections::HashMap;
 
 #[derive(Eq, PartialEq, Clone, Debug)]
 pub struct Board {
@@ -335,7 +335,7 @@ mod tests {
         let (valid, complete) = a_board.is_valid_solution();
         assert_eq!((valid, complete), (true, false));
     }
-
+    /*
     #[test]
     fn test_valid_coordinates() {
         let a_board = new_with_entries(
@@ -355,4 +355,5 @@ mod tests {
         let valid_pos_2 = a_board.get_valid_pos(4,5);
         assert_eq!( valid_pos_2, vec!(1,8) );
     }
+    */
 }
