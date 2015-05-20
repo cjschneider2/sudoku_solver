@@ -1,0 +1,459 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+	"http://www.w3.org/TR/html4/loose.dtd"><html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+<!-- start content -->
+	<meta name="keywords" content="Invalid Test Cases,Test Cases">
+	<title>Invalid Test Cases - Sudopedia Mirror</title>
+<!-- end content -->
+
+</head>
+<body>
+<div id="wm-ipp" style="position: relative; padding-top: 0px; padding-right: 5px; padding-bottom: 0px; padding-left: 5px; min-height: 70px; min-width: 800px; z-index: 9000; display: block; ">
+<a name="top" id="top"></a>
+<div id="siteNotice"><p>Mirrored from <b>Sudopedia</b>, the Free Sudoku Reference Guide</p></div>
+<hr>
+
+<!-- start content -->
+<h1 class="firstHeading">Invalid Test Cases</h1>
+			<p>Testing a good Sudoku solver should exercise the error handling as well as the algorithm.  These test cases can be divided into to basic categories: puzzles that cannot be parsed, and puzzles that cannot be solved.  A puzzle cannot be parsed if it violates any of the basic rules of Sudoku, or contains less than 17 given (starting) values.  Alternately, many puzzles can be parsed successfully, but still cannot be solved: either the starting givens don’t yield a single unique solution, or there is no possible solution.
+</p>
+<table id="toc" class="toc" summary="Contents"><tr><td><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class='toclevel-1'><a href="./Invalid_Test_Cases.html#Empty"><span class="tocnumber">1</span> <span class="toctext">Empty</span></a></li>
+<li class='toclevel-1'><a href="./Invalid_Test_Cases.html#Single_Given"><span class="tocnumber">2</span> <span class="toctext">Single Given</span></a></li>
+<li class='toclevel-1'><a href="./Invalid_Test_Cases.html#Insufficient_Givens"><span class="tocnumber">3</span> <span class="toctext">Insufficient Givens</span></a></li>
+<li class='toclevel-1'><a href="./Invalid_Test_Cases.html#Duplicate_Given_.E2.80.94_Box"><span class="tocnumber">4</span> <span class="toctext">Duplicate Given &mdash; Box</span></a></li>
+<li class='toclevel-1'><a href="./Invalid_Test_Cases.html#Duplicate_Given_.E2.80.94_Column"><span class="tocnumber">5</span> <span class="toctext">Duplicate Given &mdash; Column</span></a></li>
+<li class='toclevel-1'><a href="./Invalid_Test_Cases.html#Duplicate_Given_.E2.80.94_Row"><span class="tocnumber">6</span> <span class="toctext">Duplicate Given &mdash; Row</span></a></li>
+<li class='toclevel-1'><a href="./Invalid_Test_Cases.html#Unsolvable_Square"><span class="tocnumber">7</span> <span class="toctext">Unsolvable Square</span></a></li>
+<li class='toclevel-1'><a href="./Invalid_Test_Cases.html#Unsolvable_Box"><span class="tocnumber">8</span> <span class="toctext">Unsolvable Box</span></a></li>
+<li class='toclevel-1'><a href="./Invalid_Test_Cases.html#Unsolvable_Column"><span class="tocnumber">9</span> <span class="toctext">Unsolvable Column</span></a></li>
+<li class='toclevel-1'><a href="./Invalid_Test_Cases.html#Unsolvable_Row"><span class="tocnumber">10</span> <span class="toctext">Unsolvable Row</span></a></li>
+<li class='toclevel-1'><a href="./Invalid_Test_Cases.html#Not_Unique_.E2.80.94_2_Solutions"><span class="tocnumber">11</span> <span class="toctext">Not Unique &mdash; 2 Solutions</span></a></li>
+<li class='toclevel-1'><a href="./Invalid_Test_Cases.html#Not_Unique_.E2.80.94_3_Solutions"><span class="tocnumber">12</span> <span class="toctext">Not Unique &mdash; 3 Solutions</span></a></li>
+<li class='toclevel-1'><a href="./Invalid_Test_Cases.html#Not_Unique_.E2.80.94_4_Solutions"><span class="tocnumber">13</span> <span class="toctext">Not Unique &mdash; 4 Solutions</span></a></li>
+<li class='toclevel-1'><a href="./Invalid_Test_Cases.html#Not_Unique_.E2.80.94_10_Solutions"><span class="tocnumber">14</span> <span class="toctext">Not Unique &mdash; 10 Solutions</span></a></li>
+<li class='toclevel-1'><a href="./Invalid_Test_Cases.html#Not_Unique_.E2.80.94_125_Solutions"><span class="tocnumber">15</span> <span class="toctext">Not Unique &mdash; 125 Solutions</span></a></li>
+<li class='toclevel-1'><a href="./Invalid_Test_Cases.html#See_Also"><span class="tocnumber">16</span> <span class="toctext">See Also</span></a></li>
+</ul>
+</td></tr></table><script type="text/javascript"> if (window.showTocToggle) { var tocShowText = "show"; var tocHideText = "hide"; showTocToggle(); } </script>
+<a name="Empty"></a><h2> Empty </h2>
+<p>The ultimate in &lsquo;not enough input&rsquo;, this puzzle contains no givens at all.  To say that it has multiple solutions is something of an overstatement.  
+</p><p><b>Givens</b>
+</p>
+<pre>. . . | . . . | . . .
+. . . | . . . | . . .
+. . . | . . . | . . .
+------+-------+------
+. . . | . . . | . . .
+. . . | . . . | . . .
+. . . | . . . | . . .
+------+-------+------
+. . . | . . . | . . .
+. . . | . . . | . . .
+. . . | . . . | . . .
+</pre>
+<pre>.................................................................................
+</pre>
+<p><b>Solution</b>
+</p><p><i>(multiple solutions)</i>
+</p><p><b>Pass Condition</b>
+</p><p>Invalid Puzzle  (&ldquo;not enough givens&rdquo; / &ldquo;multiple solutions&rdquo;)
+</p>
+<hr />
+<a name="Single_Given"></a><h2> Single Given </h2>
+<p>Originally described as &lsquo;Zen Sudoku&rsquo;, rumor has it that the only way to solve this puzzle is to stare at the lone &lsquo;1&rsquo; in the center of the grid.  Expected results could include &ldquo;not enough starting values&rdquo; or &ldquo;multiple solutions&rdquo;.
+</p><p><b>Givens</b>
+</p>
+<pre>. . . | . . . | . . .
+. . . | . . . | . . .
+. . . | . . . | . . .
+------+-------+------
+. . . | . . . | . . .
+. . . | . 1 . | . . .
+. . . | . . . | . . .
+------+-------+------
+. . . | . . . | . . .
+. . . | . . . | . . .
+. . . | . . . | . . .
+</pre>
+<pre>........................................1........................................
+</pre>
+<p><b>Solution</b>
+</p><p><i>(500+ solutions)</i>
+</p><p><b>Pass Condition</b>
+</p><p>Invalid Puzzle  (&ldquo;not enough givens&rdquo; / &ldquo;multiple solutions&rdquo;)
+</p>
+<hr />
+<a name="Insufficient_Givens"></a><h2> Insufficient Givens </h2>
+<p>This puzzle has only sixteen givens, which is one less than the accepted minimum number for a classic Sudoku puzzle.  Expected results could include &ldquo;not enough starting values&rdquo; or &ldquo;multiple solutions&rdquo;.
+</p><p><b>Givens</b>
+</p>
+<pre>. . . | . . . | . . .
+. . 5 | . . . | . 9 .
+. . 4 | . . . | . 1 .
+------+-------+------
+2 . . | . . 3 | . 5 .
+. . . | 7 . . | . . .
+4 3 8 | . . . | 2 . .
+------+-------+------
+. . . | . 9 . | . . .
+. 1 . | 4 . . | . 6 .
+. . . | . . . | . . .
+</pre>
+<pre>...........5....9...4....1.2....3.5....7.....438...2......9.....1.4...6..........
+</pre>
+<p><b>Solution</b>
+</p><p><i>(500+ solutions)</i>
+</p><p><b>Pass Condition</b>
+</p><p>Invalid Puzzle  (&ldquo;not enough givens&rdquo; / &ldquo;multiple solutions&rdquo;)
+</p>
+<hr />
+<a name="Duplicate_Given_.E2.80.94_Box"></a><h2> Duplicate Given &mdash; Box </h2>
+<p>This puzzle cannot be solved, because the middle box (b5) has the value &lsquo;5&rsquo; twice.
+</p><p><b>Givens</b>
+</p>
+<pre>. . 9 | . 7 . | . . 5
+. . 2 | 1 . . | 9 . .
+1 . . | . 2 8 | . . .
+------+-------+------
+. 7 . | . . 5 | . . 1
+. . 8 | 5 1 . | . . .
+. 5 . | . . . | 3 . .
+------+-------+------
+. . . | . . 3 | . . 6
+8 . . | . . . | . . .
+2 1 . | . . . | . 8 7
+</pre>
+<pre>..9.7...5..21..9..1...28....7...5..1..851.....5....3.......3..68........21.....87
+</pre>
+<p><b>Solution</b>
+</p><p><i>(no solution)</i>
+</p><p><b>Pass Condition</b>
+</p><p>Invalid Puzzle  (&ldquo;no solution&rdquo;)
+</p>
+<hr />
+<a name="Duplicate_Given_.E2.80.94_Column"></a><h2> Duplicate Given &mdash; Column </h2>
+<p>This puzzle cannot be solved, because the middle column (c5) has the value &lsquo;1&rsquo; twice.
+</p><p><b>Givens</b>
+</p>
+<pre>6 . 1 | 5 9 . | . . .
+. 9 . | . 1 . | . . .
+. . . | . . . | . . 4
+------+-------+------
+. 7 . | 3 1 4 | . . 6
+. 2 4 | . . . | . . 5
+. . 3 | . . . | . 1 .
+------+-------+------
+. . 6 | . . . | . . 3
+. . . | 9 . 2 | . 4 .
+. . . | . . 1 | 6 . .
+</pre>
+<pre>6.159.....9..1............4.7.314..6.24.....5..3....1...6.....3...9.2.4......16..
+</pre>
+<p><b>Solution</b>
+</p><p><i>(no solution)</i>
+</p><p><b>Pass Condition</b>
+</p><p>Invalid Puzzle  (&ldquo;no solution&rdquo;)
+</p>
+<hr />
+<a name="Duplicate_Given_.E2.80.94_Row"></a><h2> Duplicate Given &mdash; Row </h2>
+<p>This puzzle cannot be solved, because the middle row (r5) has the value &lsquo;2&rsquo; twice.
+</p><p><b>Givens</b>
+</p>
+<pre>. 4 . | 1 . . | 3 5 .
+. . . | . . . | . . .
+. . . | 2 . 5 | . . .
+------+-------+------
+. . . | 4 . 8 | 9 . .
+2 6 . | . . . | . 1 2
+. 5 . | 3 . . | . . 7
+------+-------+------
+. . 4 | . . . | 1 6 .
+6 . . | . . 7 | . . .
+. 1 . | . 8 . | . 2 .
+</pre>
+<pre>.4.1..35.............2.5......4.89..26.....12.5.3....7..4...16.6....7....1..8..2.
+</pre>
+<p><b>Solution</b>
+</p><p><i>(no solution)</i>
+</p><p><b>Pass Condition</b>
+</p><p>Invalid Puzzle  (&ldquo;no solution&rdquo;)
+</p>
+<hr />
+<a name="Unsolvable_Square"></a><h2> Unsolvable Square </h2>
+<p>This puzzle cannot be solved, because the left-most square of the middle row (r5c1) has no possible candidates.
+</p><p><b>Givens</b>
+</p>
+<pre>. . 9 | . 2 8 | 7 . .
+8 . 6 | . . 4 | . . 5
+. . 3 | . . . | . . 4
+------+-------+------
+6 . . | . . . | . . .
+. 2 . | 7 1 3 | 4 5 .
+. . . | . . . | . . 2
+------+-------+------
+3 . . | . . . | 5 . .
+9 . . | 4 . . | 8 . 7
+. . 1 | 2 5 . | 3 . .
+</pre>
+<pre>..9.287..8.6..4..5..3.....46.........2.71345.........23.....5..9..4..8.7..125.3..
+</pre>
+<p><b>Solution</b>
+</p><p><i>(no solution)</i>
+</p><p><b>Pass Condition</b>
+</p><p>Invalid Puzzle  (&ldquo;no solution&rdquo;)
+</p>
+<hr />
+<a name="Unsolvable_Box"></a><h2> Unsolvable Box </h2>
+<p>This puzzle cannot be solved, because the center box (b5) has no possible candidates for the value &lsquo;4&rsquo;.
+</p><p><b>Givens</b>
+</p>
+<pre>. 9 . | 3 . . | . . 1
+. . . | . 8 . | . 4 6
+. . . | . . . | 8 . .
+------+-------+------
+4 . 5 | . 6 . | . 3 .
+. . 3 | 2 7 5 | 6 . .
+. 6 . | . 1 . | 9 . 4
+------+-------+------
+. . 1 | . . . | . . .
+5 8 . | . 2 . | . . .
+2 . . | . . 7 | . 6 .
+</pre>
+<pre>.9.3....1....8..46......8..4.5.6..3...32756...6..1.9.4..1......58..2....2....7.6.
+</pre>
+<p><b>Solution</b>
+</p><p><i>(no solution)</i>
+</p><p><b>Pass Condition</b>
+</p><p>Invalid Puzzle  (&ldquo;no solution&rdquo;)
+</p>
+<hr />
+<a name="Unsolvable_Column"></a><h2> Unsolvable Column </h2>
+<p>This puzzle cannot be solved, because the middle column (c5) has no possible candidates for the value &lsquo;2&rsquo;.
+</p><p><b>Givens</b>
+</p>
+<pre>. . . | . 4 1 | . . .
+. 6 . | . . . | . 2 .
+. . 2 | . . . | . . .
+------+-------+------
+3 2 . | 6 . . | . . .
+. . . | . 5 . | . 4 1
+7 . . | . . . | . . 2
+------+-------+------
+. . . | . . . | 2 3 .
+. 4 8 | . . . | . . .
+5 . 1 | . . 2 | . . .
+</pre>
+<pre>....41....6.....2...2......32.6.........5..417.......2......23..48......5.1..2...
+</pre>
+<p><b>Solution</b>
+</p><p><i>(no solution)</i>
+</p><p><b>Pass Condition</b>
+</p><p>Invalid Puzzle  (&ldquo;no solution&rdquo;)
+</p>
+<hr />
+<a name="Unsolvable_Row"></a><h2> Unsolvable Row </h2>
+<p>This puzzle cannot be solved, because the middle row (r5) has no possible candidates for the value &lsquo;1&rsquo;.
+</p><p><b>Givens</b>
+</p>
+<pre>9 . . | 1 . . | . . 4
+. 1 4 | . 3 . | 8 . .
+. . 3 | . . . | . 9 .
+------+-------+------
+. . . | 7 . 8 | . . 1
+8 . . | . . 3 | . . .
+. . . | . . . | . 3 .
+------+-------+------
+. 2 1 | . . . | . 7 .
+. . 9 | . 4 . | 5 . .
+5 . . | . 1 6 | . . 3
+</pre>
+<pre>9..1....4.14.3.8....3....9....7.8..18....3..........3..21....7...9.4.5..5...16..3
+</pre>
+<p><b>Solution</b>
+</p><p><i>(no solution)</i>
+</p><p><b>Pass Condition</b>
+</p><p>Invalid Puzzle  (&ldquo;no solution&rdquo;)
+</p>
+<hr />
+<a name="Not_Unique_.E2.80.94_2_Solutions"></a><h2> Not Unique &mdash; 2 Solutions </h2>
+<p>This puzzle is not a valid Sudoku, because it has two possible solutions.
+</p><p><b>Givens</b>
+</p>
+<pre>. 3 9 | . . . | 1 2 .
+. . . | 9 . 7 | . . .
+8 . . | 4 . 1 | . . 6
+------+-------+------
+. 4 2 | . . . | 7 9 .
+. . . | . . . | . . .
+. 9 1 | . . . | 5 4 .
+------+-------+------
+5 . . | 1 . 9 | . . 3
+. . . | 8 . 5 | . . .
+. 1 4 | . . . | 8 7 .
+</pre>
+<pre>.39...12....9.7...8..4.1..6.42...79...........91...54.5..1.9..3...8.5....14...87.
+</pre>
+<p><b>Solution</b>
+</p>
+<pre>439658127156927384827431956342516798785294631691783542578149263263875419914362875
+439658127156927384827431956642513798785294631391786542578149263263875419914362875
+</pre>
+<p><b>Pass Condition</b>
+</p><p>Invalid Puzzle  (&ldquo;no unique solution&rdquo;)
+</p>
+<hr />
+<a name="Not_Unique_.E2.80.94_3_Solutions"></a><h2> Not Unique &mdash; 3 Solutions </h2>
+<p>This puzzle is not a valid Sudoku, because it has three possible solutions.
+</p><p><b>Givens</b>
+</p>
+<pre>. . 3 | . . . | . . 6
+. . . | 9 8 . | . 2 .
+9 4 2 | 6 . . | 7 . .
+------+-------+------
+4 5 . | . . 6 | . . .
+. . . | . . . | . . .
+1 . 9 | . 5 . | 4 7 .
+------+-------+------
+. . . | . 2 5 | . 4 .
+6 . . | . 7 8 | 5 . .
+. . . | . . . | . . .
+</pre>
+<pre>..3.....6...98..2.9426..7..45...6............1.9.5.47.....25.4.6...785...........
+</pre>
+<p><b>Solution</b>
+</p>
+<pre>783542196516987324942631758457296813238714965169853472891325647624178539375469281
+783542916516987324942631758457216839238794165169853472891325647624178593375469281
+783542916516987324942631758457216893238794165169853472891325647624178539375469281
+</pre>
+<p><b>Pass Condition</b>
+</p><p>Invalid Puzzle  (&ldquo;no unique solution&rdquo;)
+</p>
+<hr />
+<a name="Not_Unique_.E2.80.94_4_Solutions"></a><h2> Not Unique &mdash; 4 Solutions </h2>
+<p>This puzzle is not a valid Sudoku, because it has four possible solutions.
+</p><p><b>Givens</b>
+</p>
+<pre>. . . | . 9 . | . . .
+6 . . | 4 . 7 | . . 8
+. 4 . | 8 1 2 | . 3 .
+------+-------+------
+7 . . | . . . | . . 5
+. . 4 | . . . | 9 . .
+5 . . | 3 7 1 | . . 4
+------+-------+------
+. 5 . | . 6 . | . 4 .
+2 . 1 | 7 . 8 | 5 . 9
+. . . | . . . | . . .
+</pre>
+<pre>....9....6..4.7..8.4.812.3.7.......5..4...9..5..371..4.5..6..4.2.17.85.9.........
+</pre>
+<p><b>Solution</b>
+</p>
+<pre>178693452623457198945812736716984325384526917592371684857169243231748569469235871
+178693452623457198945812736716984325384526971592371684857169243231748569469235817
+178693452623457198945812736762984315314526987589371624857169243231748569496235871
+178693452623457198945812736786924315314586927592371684857169243231748569469235871
+</pre>
+<p><b>Pass Condition</b>
+Invalid Puzzle  (&ldquo;no unique solution&rdquo;)
+</p>
+<hr />
+<a name="Not_Unique_.E2.80.94_10_Solutions"></a><h2> Not Unique &mdash; 10 Solutions </h2>
+<p>This puzzle is not a valid Sudoku, because it has ten possible solutions.
+</p><p><b>Givens</b>
+</p>
+<pre>5 9 . | . . . | . 4 8
+6 . 8 | . . . | 3 . 7
+. . . | 2 . 1 | . . .
+------+-------+------
+. . . | . 4 . | . . .
+. 7 5 | 3 . 6 | 9 8 .
+. . . | . 9 . | . . .
+------+-------+------
+. . . | 8 . 3 | . . .
+2 . 6 | . . . | 7 . 9
+3 4 . | . . . | . 6 5
+</pre>
+<pre>59.....486.8...3.7...2.1.......4.....753.698.....9.......8.3...2.6...7.934.....65
+</pre>
+<p><b>Solution</b>
+</p>
+<pre>592637148618459327437281596923748651175326984864195273759863412286514739341972865
+592637148618459327437281596963748251175326984824195673759863412286514739341972865
+592637148618459327734281596129748653475326981863195274957863412286514739341972865
+592637148618459327734281596129748653475326981863195472957863214286514739341972865
+592637148618459327734281596169748253475326981823195674957863412286514739341972865
+592637148618459327734281596829145673175326984463798251957863412286514739341972865
+592637148618459327734281596829145673475326981163798254957863412286514739341972865
+592637148618459327734281596829145673475326981163798452957863214286514739341972865
+592637148618459327734281596869145273175326984423798651957863412286514739341972865
+592637148618459327734281596869145273475326981123798654957863412286514739341972865
+</pre>
+<p><b>Pass Condition</b>
+</p><p>Invalid Puzzle  (&ldquo;no unique solution&rdquo;)
+</p>
+<hr />
+<a name="Not_Unique_.E2.80.94_125_Solutions"></a><h2> Not Unique &mdash; 125 Solutions </h2>
+<p>This puzzle is not a valid Sudoku, because it has 125 possible solutions.
+</p><p><b>Givens</b>
+</p>
+<pre>. . . | 3 1 6 | 5 . .
+8 . . | 5 . . | 1 . .
+. 1 . | 8 9 7 | 2 4 .
+------+-------+------
+9 . 1 | . 8 5 | . 2 .
+. . . | 9 . 1 | . . .
+. 4 . | 2 6 3 | . . 1
+------+-------+------
+. 5 . | . . . | . 1 .
+1 . . | 4 . 9 | . . 2
+. . 6 | 1 . 8 | . . .
+</pre>
+<pre>...3165..8..5..1...1.89724.9.1.85.2....9.1....4.263..1.5.....1.1..4.9..2..61.8...
+</pre>
+<p><b>Solution</b>
+</p>
+<pre>274316589893524167615897243931785426562941378748263951359672814187459632426138795
+274316589893524167615897243931785426762941358548263791359672814187459632426138975
+274316589893524167615897243931785426762941358548263971359672814187459632426138795
+274316589893524167615897243931785426762941835548263791459672318187439652326158974
+274316589893524167615897243931785426762941835548263971459672318187439652326158794
+</pre>
+<p><i>(additional solutions omitted for brevity)</i>
+</p>
+<pre>724316598869524173315897246931785624682941357547263981458632719173459862296178435
+724316598869524173315897246931785624682941735547263981453672819178459362296138457
+724316598869524173315897246931785624682941735547263981458672319173459862296138457
+724316598893524176615897243961785324382941765547263981459632817138479652276158439
+724316598893524176615897243961785324382941765547263981459632817178459632236178459
+</pre>
+<p><b>Pass Condition</b>
+</p><p>Invalid Puzzle  (&ldquo;no unique solution&rdquo;)
+</p>
+<hr />
+<a name="See_Also"></a><h2> See Also </h2>
+<ul><li> <a href="./Test_Cases.html" title="Test Cases">Test Cases</a>
+</li></ul>
+
+This page was last modified 18:28, 11 October 2007.
+<!-- end content -->
+&nbsp;<br>
+<hr>
+<div id="footer">
+<div id="f-copyrightico">
+<a href="http://www.gnu.org/copyleft/fdl.html"><img src="images/gnu-fdl.png" alt="GNU Free Documentation License 1.2"></a>
+</div>
+<ul id="f-list">
+<li id="copyright">Content is available under <a href="http://www.gnu.org/copyleft/fdl.html" title="http://www.gnu.org/copyleft/fdl.html" rel="nofollow">GNU Free Documentation License 1.2</a>.</li>
+<li id="about"><a href="About.html" title="Sudopedia:About">About Sudopedia</a></li>
+<li id="disclaimer"><a href="General_disclaimer.html" title="Sudopedia:General disclaimer">Disclaimers</a></li>
+<li id="mirrored">Mirrored from <a href="http://sudopedia.org">sudopedia.org</a></li>
+</ul>
+</div>
+</div>
+
+</body></html>

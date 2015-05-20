@@ -1,0 +1,169 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+	"http://www.w3.org/TR/html4/loose.dtd"><html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+<!-- start content -->
+	<meta name="keywords" content="Valid Test Cases,Test Cases">
+	<title>Valid Test Cases - Sudopedia Mirror</title>
+<!-- end content -->
+
+</head>
+<body>
+<div id="wm-ipp" style="position: relative; padding-top: 0px; padding-right: 5px; padding-bottom: 0px; padding-left: 5px; min-height: 70px; min-width: 800px; z-index: 9000; display: block; ">
+<a name="top" id="top"></a>
+<div id="siteNotice"><p>Mirrored from <b>Sudopedia</b>, the Free Sudoku Reference Guide</p></div>
+<hr>
+
+<!-- start content -->
+<h1 class="firstHeading">Valid Test Cases</h1>
+			<p>These test cases should result in a valid puzzle, and potentially a unique solution.
+</p>
+<table id="toc" class="toc" summary="Contents"><tr><td><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class='toclevel-1'><a href="./Valid_Test_Cases.html#Completed_Puzzle"><span class="tocnumber">1</span> <span class="toctext">Completed Puzzle</span></a></li>
+<li class='toclevel-1'><a href="./Valid_Test_Cases.html#Last_Empty_Square"><span class="tocnumber">2</span> <span class="toctext">Last Empty Square</span></a></li>
+<li class='toclevel-1'><a href="./Valid_Test_Cases.html#Naked_Singles"><span class="tocnumber">3</span> <span class="toctext">Naked Singles</span></a></li>
+<li class='toclevel-1'><a href="./Valid_Test_Cases.html#Hidden_Singles"><span class="tocnumber">4</span> <span class="toctext">Hidden Singles</span></a></li>
+<li class='toclevel-1'><a href="./Valid_Test_Cases.html#See_Also"><span class="tocnumber">5</span> <span class="toctext">See Also</span></a></li>
+</ul>
+</td></tr></table><script type="text/javascript"> if (window.showTocToggle) { var tocShowText = "show"; var tocHideText = "hide"; showTocToggle(); } </script>
+<a name="Completed_Puzzle"></a><h2> Completed Puzzle </h2>
+<p>A case of &lsquo;more than enough&rsquo;, this puzzle has already been solved.  Nonetheless, it is still a valid puzzle, and should be parsed successfully.
+</p><p><b>Givens</b>
+</p>
+<pre>9 7 4 | 2 3 6 | 1 5 8
+6 3 8 | 5 9 1 | 7 4 2
+1 2 5 | 4 8 7 | 9 3 6
+------+-------+------
+3 1 6 | 7 5 4 | 2 8 9
+7 4 2 | 9 1 8 | 5 6 3
+5 8 9 | 3 6 2 | 4 1 7
+------+-------+------
+8 6 7 | 1 2 5 | 3 9 4
+2 5 3 | 6 4 9 | 8 7 1
+4 9 1 | 8 7 3 | 6 2 5
+</pre>
+<pre>974236158638591742125487936316754289742918563589362417867125394253649871491873625
+</pre>
+<p><b>Solution</b>
+</p>
+<pre>974236158638591742125487936316754289742918563589362417867125394253649871491873625
+</pre>
+<p><b>Pass Condition</b>
+</p><p>Unique Solution Found 
+</p>
+<hr />
+<a name="Last_Empty_Square"></a><h2> Last Empty Square </h2>
+<p>This puzzle requires only a single value to be placed on the grid in order to reach the unique solution: a &lsquo;3&rsquo; in square r5c5.
+</p><p><b>Givens</b>
+</p>
+<pre>2 5 6 | 4 8 9 | 1 7 3
+3 7 4 | 6 1 5 | 9 8 2
+9 8 1 | 7 2 3 | 4 5 6
+------+-------+------
+5 9 3 | 2 7 4 | 8 6 1
+7 1 2 | 8 . 6 | 5 4 9
+4 6 8 | 5 9 1 | 3 2 7
+------+-------+------
+6 3 5 | 1 4 7 | 2 9 8
+1 2 7 | 9 5 8 | 6 3 4
+8 4 9 | 3 6 2 | 7 1 5
+</pre>
+<pre>2564891733746159829817234565932748617128.6549468591327635147298127958634849362715
+</pre>
+<p><b>Solution</b>
+</p>
+<pre>256489173374615982981723456593274861712836549468591327635147298127958634849362715
+</pre>
+<p><b>Pass Condition</b>
+</p><p>Unique Solution Found
+</p>
+<hr />
+<a name="Naked_Singles"></a><h2> Naked Singles </h2>
+<p>This puzzle can be solved using only &lsquo;Naked Singles&rsquo;&mdash;also called &lsquo;sole candidates&rsquo;&mdash;which occur when a square has only one possible value remaining.  The most obvious example of a Naked Single is the last square in any box, column, or row.
+</p><p><b>Givens</b>
+</p>
+<pre>3 . 5 | 4 2 . | 8 1 .
+4 8 7 | 9 . 1 | 5 . 6
+. 2 9 | . 5 6 | 3 7 4
+------+-------+------
+8 5 . | 7 9 3 | . 4 1
+6 1 3 | 2 . 8 | 9 5 7
+. 7 4 | . 6 5 | 2 8 .
+------+-------+------
+2 4 1 | 3 . 9 | . 6 5
+5 . 8 | 6 7 . | 1 9 2
+. 9 6 | 5 1 2 | 4 . 8
+</pre>
+<pre>3.542.81.4879.15.6.29.5637485.793.416132.8957.74.6528.2413.9.655.867.192.965124.8
+</pre>
+<p><b>Solution</b>
+</p>
+<pre>365427819487931526129856374852793641613248957974165283241389765538674192796512438
+</pre>
+<p><b>Pass Condition</b>
+</p><p>Unique Solution
+</p><p>Naked Singles:
+</p>
+<pre>r1c2 => 6	r1c6 => 7	r1c9 => 9	r2c5 => 3
+r2c8 => 2	r3c1 => 1	r3c4 => 8	r4c3 => 2
+r4c7 => 6	r5c5 => 4	r6c1 => 9	r6c4 => 1
+r6c9 => 3	r7c5 => 8	r7c7 => 7	r8c2 => 3
+r8c6 => 4	r9c1 => 7	r9c8 => 3
+</pre>
+<hr />
+<a name="Hidden_Singles"></a><h2> Hidden Singles </h2>
+<p>This puzzle requires &lsquo;Hidden Singles&rsquo; to solve, which occur when a box, column, or row has only one possible square remaining for a given value.  
+</p><p><b>Givens</b>
+</p>
+<pre>. . 2 | . 3 . | . . 8
+. . . | . . 8 | . . .
+. 3 1 | . 2 . | . . .
+------+-------+------
+. 6 . | . 5 . | 2 7 .
+. 1 . | . . . | . 5 .
+2 . 4 | . 6 . | . 3 1
+------+-------+------
+. . . | . 8 . | 6 . 5
+. . . | . . . | . 1 3
+. . 5 | 3 1 . | 4 . .
+</pre>
+<pre>..2.3...8.....8....31.2.....6..5.27..1.....5.2.4.6..31....8.6.5.......13..531.4..
+</pre>
+<p><b>Solution</b>
+</p>
+<pre>672435198549178362831629547368951274917243856254867931193784625486592713725316489
+</pre>
+<p><b>Pass Condition</b>
+</p><p>Unique Solution
+</p><p>Hidden Singles:
+</p>
+<pre>r3c1 => 8	r7c1 => 1	r2c7 => 3	r2c4 => 1
+r1c7 => 1	r3c7 => 5	r6c2 => 5	r2c1 => 5
+r4c6 => 1	r5c6 => 3	r4c1 => 3	r7c3 => 3
+r5c4 => 2	r5c9 => 6	r5c5 => 4	r4c9 => 4
+r8c7 => 7
+</pre>
+<hr />
+<a name="See_Also"></a><h2> See Also </h2>
+<ul><li> <a href="./Test_Cases.html" title="Test Cases">Test Cases</a>
+</li></ul>
+
+This page was last modified 18:29, 11 October 2007.
+<!-- end content -->
+&nbsp;<br>
+<hr>
+<div id="footer">
+<div id="f-copyrightico">
+<a href="http://www.gnu.org/copyleft/fdl.html"><img src="images/gnu-fdl.png" alt="GNU Free Documentation License 1.2"></a>
+</div>
+<ul id="f-list">
+<li id="copyright">Content is available under <a href="http://www.gnu.org/copyleft/fdl.html" title="http://www.gnu.org/copyleft/fdl.html" rel="nofollow">GNU Free Documentation License 1.2</a>.</li>
+<li id="about"><a href="About.html" title="Sudopedia:About">About Sudopedia</a></li>
+<li id="disclaimer"><a href="General_disclaimer.html" title="Sudopedia:General disclaimer">Disclaimers</a></li>
+<li id="mirrored">Mirrored from <a href="http://sudopedia.org">sudopedia.org</a></li>
+</ul>
+</div>
+</div>
+
+</body></html>

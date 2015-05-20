@@ -3,6 +3,10 @@ name = "sudoku_solver"
 version = "0.1.0"
 authors = ["cjschneider2 <cjschneider2@gmail.com>"]
 
+[dependencies]
+glium = "*"
+glutin = "*"
+
 [lib]
 name = "sudoku_solver"
 path = "src/lib.rs"
