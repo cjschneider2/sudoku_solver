@@ -35,7 +35,15 @@ pub fn solve_with_backtracing(state:&mut Box<Board>) -> bool {
 
 #[cfg(test)]
 mod tests {
-    use board::new_with_entries;
+    use std::io::prelude::*;
+    use std::path::Path;
+    use std::fs;
+    use std::fs::File;
+    use std::error::Error;
+    use board::Board;
+    use board::{new_empty, new_with_entries};
+    use solver::solve_with_backtracing;
+
     #[test]
     fn test_next_state_next_vector() {
         let mut a_board = Box::new(new_with_entries(
@@ -53,5 +61,33 @@ mod tests {
         let out_state = super::solve_with_backtracing(&mut a_board);
         println!("{:?}", a_board);
         assert!(out_state);
+    }
+    #[test]
+    fn solve_all() {
+        let mut all_solved = false;
+        // we'll enumerate our sample sudoku tests from the 'tests.txt' file,
+        // one sudoku puzzle per line.
+        let path = Path::new("./tests/tests.txt"); // starts in the main dir
+        let mut file = match File::open(&path) {
+            Ok(file) => file,
+            Err(error) => panic!("couldn't open file {}: {}", path.display(),
+                            Error::description(&error)),
+        };
+        let mut string = String::new();
+        let _ = file.read_to_string(&mut string);
+        let entries: Vec<&str> = string.split_terminator("\r\n").collect();
+
+        let mut solved_cnt = 0;
+        let mut cnt = 0;
+        for ent in entries{
+            let mut input_board = Box::new(board_serialize::deserialize(&ent));
+            println!("Solving board:\n{:?}", input_board );
+            let solved = solve_with_backtracing(&mut input_board);
+            println!("{}", solved);
+            if solved { solved_cnt += 1; }
+            cnt += 1;
+        }
+        if cnt == solved_cnt { all_solved = true; }
+        assert!(all_solved);
     }
 }

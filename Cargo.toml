@@ -4,8 +4,23 @@ version = "0.1.0"
 authors = ["cjschneider2 <cjschneider2@gmail.com>"]
 
 [dependencies]
-glium = "*"
-glutin = "*"
+rustc-serialize = "0.3"
+rand = "0.3.7"
+
+[dependencies.piston2d-graphics]
+git = "https://github.com/pistondevelopers/graphics"
+
+[dependencies.piston]
+git = "https://github.com/pistondevelopers/piston"
+
+[dependencies.piston2d-opengl_graphics]
+git = "https://github.com/pistondevelopers/opengl_graphics"
+
+[dependencies.pistoncore-sdl2_window]
+git = "https://github.com/pistondevelopers/sdl2_window"
+
+[dependencies.freetype-rs]
+git = "https://github.com/PistonDevelopers/freetype-rs"
 
 [lib]
 name = "sudoku_solver"
