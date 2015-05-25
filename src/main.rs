@@ -19,6 +19,7 @@ use graphics::math::Matrix2d;
 mod board;
 mod solver;
 mod board_serialize;
+mod compositor;
 
 pub struct App {
     gl: GlGraphics,

@@ -2,7 +2,7 @@
 name = "sudoku_solver"
 version = "0.1.0"
 dependencies = [
- "freetype-rs 0.0.9 (git+https://github.com/PistonDevelopers/freetype-rs.git)",
+ "freetype-rs 0.0.9 (git+https://github.com/PistonDevelopers/freetype-rs)",
  "piston 0.1.1 (git+https://github.com/pistondevelopers/piston)",
  "piston2d-graphics 0.0.46 (git+https://github.com/pistondevelopers/graphics)",
  "piston2d-opengl_graphics 0.0.16 (git+https://github.com/pistondevelopers/opengl_graphics)",
@@ -48,7 +48,7 @@ dependencies = [
 [[package]]
 name = "freetype-rs"
 version = "0.0.9"
-source = "git+https://github.com/PistonDevelopers/freetype-rs.git#686a4d7ff99eddfc64fbe7d2c3a19832ee564614"
+source = "git+https://github.com/PistonDevelopers/freetype-rs#686a4d7ff99eddfc64fbe7d2c3a19832ee564614"
 dependencies = [
  "bitflags 0.1.1 (registry+https://github.com/rust-lang/crates.io-index)",
  "freetype-sys 0.0.5 (registry+https://github.com/rust-lang/crates.io-index)",
@@ -173,7 +173,7 @@ source = "git+https://github.com/pistondevelopers/shaders#a2cbd6c63b5cb6852f2bef
 [[package]]
 name = "piston-texture"
 version = "0.0.1"
-source = "git+https://github.com/PistonDevelopers/texture#3cc4cddc3f8c51c36ea11dd2f63d70aa887f53fb"
+source = "git+https://github.com/pistondevelopers/texture#3cc4cddc3f8c51c36ea11dd2f63d70aa887f53fb"
 
 [[package]]
 name = "piston-viewport"
@@ -190,7 +190,7 @@ source = "git+https://github.com/pistondevelopers/graphics#e5885956fd49bafa968f8
 dependencies = [
  "draw_state 0.0.7 (git+https://github.com/gfx-rs/draw_state)",
  "interpolation 0.0.5 (git+https://github.com/PistonDevelopers/interpolation)",
- "piston-texture 0.0.1 (git+https://github.com/PistonDevelopers/texture)",
+ "piston-texture 0.0.1 (git+https://github.com/pistondevelopers/texture)",
  "piston-viewport 0.0.2 (git+https://github.com/pistondevelopers/viewport)",
  "read_color 0.0.2 (git+https://github.com/PistonDevelopers/read_color)",
  "vecmath 0.0.22 (git+https://github.com/PistonDevelopers/vecmath)",
@@ -201,13 +201,13 @@ name = "piston2d-opengl_graphics"
 version = "0.0.16"
 source = "git+https://github.com/pistondevelopers/opengl_graphics#e5b42614e07add8b972174eebd14f52b8c1467cc"
 dependencies = [
- "freetype-rs 0.0.9 (git+https://github.com/PistonDevelopers/freetype-rs.git)",
+ "freetype-rs 0.0.9 (git+https://github.com/PistonDevelopers/freetype-rs)",
  "gl 0.0.12 (git+https://github.com/bjz/gl-rs)",
  "image 0.3.9 (git+https://github.com/pistondevelopers/image)",
  "khronos_api 0.0.5 (registry+https://github.com/rust-lang/crates.io-index)",
  "libc 0.1.8 (registry+https://github.com/rust-lang/crates.io-index)",
  "piston-shaders_graphics2d 0.0.0 (git+https://github.com/pistondevelopers/shaders)",
- "piston-texture 0.0.1 (git+https://github.com/PistonDevelopers/texture)",
+ "piston-texture 0.0.1 (git+https://github.com/pistondevelopers/texture)",
  "piston2d-graphics 0.0.46 (git+https://github.com/pistondevelopers/graphics)",
  "shader_version 0.0.6 (git+https://github.com/pistondevelopers/shader_version)",
 ]
