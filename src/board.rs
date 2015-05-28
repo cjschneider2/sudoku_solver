@@ -1,5 +1,3 @@
-//use std::collections::HashMap;
-
 #[derive(Eq, PartialEq, Clone, Debug)]
 pub struct Board {
     entries: [[usize; 9]; 9]
@@ -31,7 +29,7 @@ impl Board {
             match check {
                 None => valid = false,
                 Some(remaining) => {
-                    if remaining.len() > 0 { complete = false; }
+                    if remaining { complete = false; }
                 }
             }
         }
@@ -41,7 +39,7 @@ impl Board {
             match check {
                 None => valid =  false,
                 Some(remaining) => {
-                    if remaining.len() > 0 { complete = false; }
+                    if remaining { complete = false; }
                 }
             }
         }
@@ -51,7 +49,7 @@ impl Board {
             match check {
                 None => valid = false,
                 Some(remaining) => {
-                    if remaining.len() > 0 { complete = false; }
+                    if remaining { complete = false; }
                 }
             }
         }
@@ -60,7 +58,27 @@ impl Board {
         (valid, complete)
     }
 
-    fn check_column(&self, col_num: usize) -> Option<Vec<usize>> {
+    fn check_column(&self, col_num: usize) -> Option<bool> {
+        let mut remaining = false;
+        for num in 1..10 {
+            let mut contains_num = false;
+            for idx in 0..9 {
+                if self.entries[idx][col_num] == num {
+                    if contains_num {
+                        return None;
+                    } else {
+                        contains_num = true;
+                    }
+                }
+            }
+            if !contains_num {
+                remaining = true;
+            }
+        }
+        Some(remaining)
+    }
+
+    fn get_valid_column_entries(&self, col_num: usize) -> Option<Vec<usize>> {
         // Create a new return vector which will contain the numbers which
         // are still valid for this column.
         let mut return_vector:Vec<usize> = Vec::new();
@@ -86,7 +104,27 @@ impl Board {
         Some(return_vector)
     }
 
-    fn check_row(&self, row_num: usize) -> Option<Vec<usize>> {
+    fn check_row(&self, row_num: usize) -> Option<bool> {
+        let mut remaining = false;
+        for num in 1..10 {
+            let mut contains_num = false;
+            for idx in 0..9 {
+                if self.entries[row_num][idx] == num {
+                    if contains_num {
+                        return None;
+                    } else {
+                        contains_num = true;
+                    }
+                }
+            }
+            if !contains_num {
+                remaining = true;
+            }
+        }
+        Some(remaining)
+    }
+
+    fn get_valid_row_entries(&self, row_num: usize) -> Option<Vec<usize>> {
         let mut return_vector:Vec<usize> = Vec::new();
         for num in 1..10 { // [1,10) in rust
             let mut contains_num = false;
@@ -114,9 +152,34 @@ impl Board {
     ///     +-+-+-+
     ///     |6|7|8|
     ///     +-+-+-+
-    fn check_zone(&self, zone_num: usize) -> Option<Vec<usize>> {
+    fn check_zone(&self, zone_num: usize) -> Option<bool> {
+        let mut remaining = false;
+        let coord_iter = self.zone_range(zone_num);
+        for num in 1..10 {
+            let mut contains_num = false;
+            for coord in coord_iter.iter() {
+                match *coord {
+                    (idx, idy) => {
+                        if self.entries[idx][idy] == num {
+                            if contains_num {
+                                return None;
+                            } else {
+                                contains_num = true;
+                            }
+                        }
+                    }
+                }
+            }
+            if !contains_num {
+                remaining = true;
+            }
+        }
+        Some(remaining)
+    }
+
+    fn get_valid_zone_entries(&self, zone_num: usize) -> Option<Vec<usize>> {
         let mut return_vector:Vec<usize> = Vec::new();
-        let coord_iter = self.zone_range(zone_num).unwrap_or(Vec::new());
+        let coord_iter = self.zone_range(zone_num);
         for num in 1..10 { // NOTE: the range [1,9] in rust
             let mut contains_num = false;
             for coord in &coord_iter {
@@ -140,10 +203,7 @@ impl Board {
     }
 
     /// This is a helper function to calculate the ranges needed for a zone.
-    fn zone_range(&self, zone_num: usize) -> Option<Vec<(usize,usize)>> {
-        // A simple check to see if we are staying within the bounds...
-        // Probably not needed if it's called correctly.
-        if zone_num > 8 { return None; }
+    fn zone_range(&self, zone_num: usize) -> Vec<(usize,usize)> {
         let mut iter_vec:Vec<(usize,usize)> = Vec::new();
         // Calculate the starting row and column for the zone
         let col = (zone_num % 3) * 3;
@@ -154,7 +214,7 @@ impl Board {
                 iter_vec.push((idx,idy));
             }
         }
-        Some(iter_vec)
+        iter_vec
     }
 
     /// Finds the next empty board location
@@ -228,20 +288,22 @@ impl Board {
         println!("+---+---+---+");
     }
 
-    /*
     /// Warning: Unstable
     /// Finds and returns a vector of valid posibilites for the given coordinates.
     /// This process is an attempt to only check valid positions to save some
     /// computing power.
     pub fn get_valid_pos(&self, x:usize, y:usize) -> Vec<usize> {
+
+        use std::collections::HashMap;
+
         let mut result_vec:Vec<usize> = Vec::new();
         let x_z = (x as f32/3f32).floor() as usize;
         let y_z = (y as f32/3f32).floor() as usize;
         let zone_num = x_z*3 + y_z;
         // We can check the col, row, and zone to get a set of posibilities.
-        let row = self.check_row(x).unwrap_or(Vec::new());
-        let col = self.check_column(y).unwrap_or(Vec::new());
-        let zone = self.check_zone(zone_num).unwrap_or(Vec::new());
+        let row = self.get_valid_row_entries(x).unwrap_or(Vec::new());
+        let col = self.get_valid_column_entries(y).unwrap_or(Vec::new());
+        let zone = self.get_valid_zone_entries(zone_num).unwrap_or(Vec::new());
 
         // Here comes the problem hoever, we can't just merge and dedup the list.
         // We have to make sure that each possible entry is also valid for the others
@@ -267,7 +329,6 @@ impl Board {
         result_vec.sort();
         result_vec
     }
-    */
 }
 
 pub fn new_empty( ) -> Board {
@@ -335,7 +396,6 @@ mod tests {
         let (valid, complete) = a_board.is_valid_solution();
         assert_eq!((valid, complete), (true, false));
     }
-    /*
     #[test]
     fn test_valid_coordinates() {
         let a_board = new_with_entries(
@@ -355,5 +415,4 @@ mod tests {
         let valid_pos_2 = a_board.get_valid_pos(4,5);
         assert_eq!( valid_pos_2, vec!(1,8) );
     }
-    */
 }

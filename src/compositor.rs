@@ -1,4 +1,4 @@
-
+/*
 trait Drawable {
     fn draw(&self, &Compositor);
 }
@@ -8,5 +8,6 @@ struct Entity<T> {
 }
 
 struct Compositor {
-    layers: Vec<Entity,
+    layers: Vec<Entity>,
 }
+*/

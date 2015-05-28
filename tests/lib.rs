@@ -4,6 +4,7 @@ extern crate sudoku_solver;
 
 use sudoku_solver::board;
 use sudoku_solver::solver;
+use sudoku_solver::board_serialize;
 
 #[test]
 fn display_empty_board() {
@@ -39,4 +40,14 @@ fn test_solution () {
          [ 2,6,5, 1,7,9, 8,3,4]]);
     solver::solve_with_backtracing(&mut a_board);
     assert!(*a_board == sol_board);
+}
+
+#[test]
+fn test_deserialize_and_solve() {
+
+    let mut a_board = Box::new(board_serialize::deserialize("52...6.........7.13...........4..8..6......5...........418.........3..2...87....."));
+    solver::solve_with_backtracing(&mut a_board);
+    a_board.display();
+    println!("{:?}", a_board.is_valid_solution());
+    assert!(false);
 }
